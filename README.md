@@ -8,6 +8,10 @@ How do I install it?
 --------------------
 Copy the content of the script on your system and make it executable with chmod +x.
 
+On which versions does it run?
+------------------------------
+The script has been found working on R80.40 and R81 VSX so it's safe to assume it will work on R80.x and R81.x versions at the time of this writing.
+
 How does it work?
 -----------------
 The script will use the output of "vsx stat -v" and will parse it with awk in order to detect VSID and names.
