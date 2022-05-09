@@ -1,0 +1,41 @@
+#!/bin/bash
+
+#System variable definitions
+
+t=0
+array_offset=1
+array_index=0
+
+#Initialize display and arrays
+clear
+echo "VSX CoreXL allocation summary"
+echo "-----------------------------"
+printf "\n"
+
+readarray -t vs_index < <(vsx stat -v | awk '{if ($3 == "S") print $1}')
+readarray -t vs_name < <(vsx stat -v | awk '{if ($3 == "S") print $4}')
+declare -p vs_list &>/dev/null
+declare -p vs_name &>/dev/null
+
+#Initialize for loop and match array index
+
+for i in ${vs_index[@]}
+do
+evaluator=$(($array_index+1))
+
+
+#Verifiy if there is not a gap in VS index
+
+if [[ ! " $evaluator -eq  $array_index " ]]; then
+array_index=$(($array_index + 2))
+fi
+
+#Display results
+
+corecount=(`cpwd_admin list -ctx $i | grep _wd | awk {'print $11'}`)
+echo "Virtual System ID $i with name ${vs_name[$array_index]} has been assigned $corecount CoreXL instances"
+array_index=$(($array_index+$array_offset))
+t=$(($t + $corecount))
+done
+printf "\n"
+echo "A total of $t CoreXL instances have been assigned between all virtusl systems."
