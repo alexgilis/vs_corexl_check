@@ -30,3 +30,4 @@ The author of the script can not be held liable for any damage, loss of informat
 The author of the script is not obligated to provide any assistance or updates to users of this script.
 By using the script, you agree on the provisions of this disclaimer.
 All brands cited are trademarks of their respective owners.
+The author of this script is not endorsed or contracted by Check Point to provide the tool.
