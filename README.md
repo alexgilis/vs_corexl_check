@@ -26,7 +26,7 @@ As of today there are no yet VSX API that can be used for that kind of checks.
 DISCLAIMER
 ----------
 vs_corexl_check is provided as is and is not supported or endorsed by Check Point.
-The author of the script can not be held liable for any damage, loss of information, system malfunction be it hardware or software, negative business impact, loss of revenue and any other consequences resulting from the use of the script.
+The author of the script can not be held liable for any damage, loss of information, system malfunction be it hardware or software, negative business impact, loss of revenue or any other consequences resulting from the use of the script.
 The author of the script is not obligated to provide any assistance or updates to users of this script.
 By using the script, you agree on the provisions of this disclaimer.
 All brands cited are trademarks of their respective owners.
