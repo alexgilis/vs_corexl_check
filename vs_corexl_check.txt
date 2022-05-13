@@ -1,10 +1,9 @@
-#!/bin/bash
+System variable definitions
+---------------------------
 
-#System variable definitions
-
-t=0
-array_offset=1
-array_index=0
+t=0             #Assigned CoreXL instance counter
+array_offset=1  #Since arrays begin with an index of 0 but VS count starts at 1
+array_index=0   #Base array index is 0
 
 #Initialize display and arrays
 clear
@@ -33,9 +32,20 @@ fi
 #Display results
 
 corecount=(`cpwd_admin list -ctx $i | grep _wd | awk {'print $11'}`)
+conns_count=(`vsx stat -l $i | grep peak | awk '{print $3}'`)
+conns_limit=(`vsx stat -l $i | grep limit | awk '{print $3}'`)
+conns_ratio=(`echo "scale=2; ($conns_count / $conns_limit) * 100" | bc`)
+if (( $(bc <<< "$conns_ratio<=75") )); then conn_color=2; elif
+ (( $(bc <<< "$conns_ratio>75 && $conns_ratio<=85") )); then conn_color=3; else
+ conn_color=1; fi
+
 echo "Virtual System ID $i with name ${vs_name[$array_index]} has been assigned $corecount CoreXL instances"
+echo "Peak connections#: $conns_count"
+echo "Connections limit#: $conns_limit"
+echo "Connections ratio: $(tput setaf $conn_color) $conns_ratio% $(tput setaf 7)"
+echo "--"
 array_index=$(($array_index+$array_offset))
 t=$(($t + $corecount))
 done
 printf "\n"
-echo "A total of $t CoreXL instances have been assigned between all virtusl systems."
+echo "A total of $t CoreXL instances have been assigned between all virtual systems."
