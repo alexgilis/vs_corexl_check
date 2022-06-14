@@ -1,3 +1,15 @@
+#!/bin/bash
+
+#Import the vsenv shell to run vsenv commands
+source /etc/profile.d/vsenv.sh
+
+#Check if this is a VSX system, if not exit with error code 1.
+vsenv 2&> /dev/null
+if [[ "$? -eq 0" ]]; then
+echo "This is not a VSX system, exiting."
+exit 1
+fi
+
 System variable definitions
 ---------------------------
 
